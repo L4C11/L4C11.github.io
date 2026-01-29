@@ -170,46 +170,56 @@ body.en-mode .lang-en { display: inline !important; }
 /*----------------------------------------------------------------------------------------
 /*----------------------------------------------------------------------------------------
 
-/* === MOBIL NÉZET (RESPONSIVE) === */
+/* === MOBIL NÉZET (JAVÍTOTT MESSENGER VERZIÓ) === */
 @media (max-width: 768px) {
-    /* 1. A fejléc elrendezésének megváltoztatása: egymás alá (column) */
     header .container {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 15px; /* Kisebb margó mobilon */
+        padding: 10px; /* Kicsit kevesebb padding, hogy több hely maradjon */
+        width: 100%;   /* Biztosítjuk, hogy kitöltse a keretet */
+        box-sizing: border-box; /* A padding ne növelje a szélességet */
     }
 
-    /* 2. A Név (Logó) beállításai mobilon */
     header .logo {
-        margin-bottom: 15px; /* Távolság a menütől */
-        font-size: 1.5rem;   /* Kicsit kisebb betűméret, hogy kiférjen */
-        white-space: nowrap; /* Ez TILTJA LE a sortörést: mindenképp egy sor marad */
-        width: 100%;         /* Teljes szélesség */
-        text-align: center;  /* Középre igazítjuk */
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+
+        /* TRÜKK: */
+        /* A betűméret alkalmazkodjon a képernyő szélességéhez (viewport width) */
+        /* Így mobilon kisebb lesz, tableten nagyobb, de mindig kifér egy sorba */
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+
+        /* Engedjük a sortörést, HA nagyon muszáj, de próbáljuk egyben tartani */
+        white-space: normal;
+        line-height: 1.2;
+
+        /* Ez biztosítja, hogy a szavak (pl. a neved) ne törjenek ketté */
+        word-break: keep-all;
     }
 
-    /* 3. A jobb oldali rész (Menü + Nyelvváltó) középre igazítása */
     .header-right {
         width: 100%;
-        justify-content: center;
-        flex-direction: column; /* Mobilon a menü és a nyelvváltó is kerüljön egymás alá */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         gap: 10px;
     }
 
-    /* 4. A navigáció igazítása */
     nav ul {
+        display: flex;
         justify-content: center;
         padding: 0;
-        margin-bottom: 10px; /* Távolság a nyelvváltótól */
+        margin: 0;
+        flex-wrap: wrap; /* Ha nagyon kicsi a hely, a menüpontok egymás alá kerülhetnek */
     }
 
-    /* 5. A menüpontok méretének finomítása */
     nav ul li {
-        margin: 0 5px;
+        margin: 0 8px; /* Kisebb távolság a menüpontok között */
     }
 
     nav ul li a {
-        font-size: 0.95rem;
+        font-size: 0.9rem; /* Kicsit kompaktabb menü betűméret */
     }
 }
