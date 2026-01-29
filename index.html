@@ -3,32 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szakmai Portfólió</title>
-    
+    <title>Madár László Adrián Portfólió</title>
+
     <link rel="stylesheet" href="static/css/main/style.css">
-    
     <link id="dynamic-style" rel="stylesheet" href="static/css/home/style.css">
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <h1 class="logo">Szakmai Portfólió</h1>
+    <div class="container">
+        <h1 class="logo">
+            <span class="lang-hu">Madár László Adrián</span>
+            <span class="lang-en">László Adrián Madár</span>
+        </h1>
+
+        <div class="header-right">
             <nav>
                 <ul>
-                    <li><a href="#" onclick="loadContent('home')">Kezdőlap</a></li>
-                    <li><a href="#" onclick="loadContent('projects')">Projektek</a></li>
+                    <li>
+                        <a href="#" onclick="loadContent('home')">
+                            <span class="lang-hu">Kezdőlap</span>
+                            <span class="lang-en">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="loadContent('projects')">
+                            <span class="lang-hu">Projektek</span>
+                            <span class="lang-en">Projects</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
-        </div>
-    </header>
 
-    <main id="content-area" class="container">
+            <div class="lang-switch">
+                <button onclick="setLanguage('hu')" class="lang-btn active" id="btn-hu">HU</button>
+                <span class="separator">|</span>
+                <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">EN</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main id="content-area" class="container" style="transition: opacity 0.2s ease;">
         </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Szakmai Portfólió</p>
+            <p>
+                <span class="lang-hu">&copy; 2026 Madár László Adrián</span>
+                <span class="lang-en">&copy; 2026 László Adrián Madár</span>
+            </p>
         </div>
     </footer>
 

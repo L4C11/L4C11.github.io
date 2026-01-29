@@ -1,143 +1,168 @@
-/* Alapbeállítások és Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* === GLOBÁLIS VÁLTOZÓK & RESET === */
+:root {
+    /* Színpaletta */
+    --primary-dark: #2c3e50;    /* Sötét szürke - Fő szövegek, címsorok */
+    --secondary-grey: #607d8b;  /* Közép szürke - Kiegészítő szövegek */
+    --accent-blue: #7fb3d5;     /* Halvány kék (Accent) - Gombok, kiemelések */
+    --soft-bg-blue: #f0f6f9;    /* Nagyon halvány kék háttérnek */
+    --white: #ffffff;
+
+    /* Formák */
+    --radius-card: 16px;        /* Kártyák lekerekítése */
+    --radius-btn: 30px;         /* Gombok lekerekítése */
+    --shadow-soft: 0 10px 30px -15px rgba(0, 0, 0, 0.1); /* Finom árnyék */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* A main helyett az ID-t használjuk, mert az erősebb mint a .container osztály */
+#content-area {
+    margin-top: 15px; /* Most már működni fog a térköz */
+    min-height: 10vh;  /* Hogy kevés tartalomnál se ugorjon fel a lábléc */
+    padding-bottom: 5px; /* Egy kis térköz a lábléc előtt is jól jön */
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', 'Roboto', Helvetica, sans-serif;
+    line-height: 1.7;
+    color: var(--secondary-grey);
+    background-color: var(--soft-bg-blue); /* Az egész oldalnak adunk egy nagyon enyhe tónust */
+    overflow-x: hidden; /* Az animációk miatt fontos */
 }
 
-.container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
+.container { max-width: 1100px; margin: 0 auto; padding: 0 25px; }
+h1, h2, h3, h4 { color: var(--primary-dark); font-weight: 700; letter-spacing: -0.5px; }
+a { text-decoration: none; transition: all 0.3s ease; }
+
+/* === ANIMÁCIÓK (A "Profi" hatáshoz) === */
+
+/* Finom beúszás fentről lefelé */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Navigáció */
-.header-main {
-    background: #333;
-    color: #fff;
-    padding: 1rem 0;
+/* Osztályok, amiket a HTML elemekre teszünk */
+.animate-block {
+    opacity: 0; /* Alapból láthatatlan */
+    animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Késleltetések a lépcsőzetes betöltéshez */
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+/* === NAVIGÁCIÓ === */
+header {
+    background: var(--white);
+    padding: 1.2rem 0;
+    box-shadow: var(--shadow-soft);
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
 }
 
-.header-main .container {
+/* Header elrendezés */
+header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.header-main ul {
+.logo {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    /* A logó maradjon sima szöveg, ne legyen gomb kinézete */
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+header nav ul {
     list-style: none;
     display: flex;
+    gap: 15px; /* Gombok közti távolság */
 }
 
-.header-main ul li {
-    margin-left: 20px;
-}
-
-.header-main a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Szekciók általános formázása */
-section {
-    padding: 60px 0;
-}
-
-.section-hero {
-    background: #fff;
-    text-align: center;
-    padding: 100px 0;
-}
-
-.section-light {
-    background: #f4f4f4;
-}
-
-.section-dark {
-    background: #e2e2e2;
-}
-
-h2, h3 {
-    margin-bottom: 20px;
-    color: #2c3e50;
-}
-
-/* Gombok */
-.btn {
+/* A menü gombok stílusa - Badge design, sötétebb színnel */
+header nav a {
     display: inline-block;
-    background: #007bff;
-    color: #fff;
-    padding: 10px 20px;
     text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--secondary-grey); /* Sötétebb alapszín */
+
+    /* Gomb szerkezet */
+    padding: 8px 20px;
+    border: 2px solid var(--secondary-grey); /* Sötétebb keret */
+    border-radius: var(--radius-btn);
+    transition: all 0.3s ease;
 }
 
-.btn:hover {
-    background: #0056b3;
+/* Hover effekt: Sötét kitöltés és fehér szöveg */
+header nav a:hover {
+    background-color: var(--secondary-grey);
+    color: var(--white);
+    transform: translateY(-2px); /* Kicsit megemelkedik */
+    box-shadow: 0 5px 15px rgba(96, 125, 139, 0.3); /* Színhelyes árnyék */
 }
 
-/* Tapasztalat elemek */
-.job-item {
-    background: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-left: 5px solid #007bff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+/* Nyelvváltó Stílusok */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--soft-bg-blue);
+    padding: 5px 15px;
+    border-radius: 20px; /* Kapszula forma */
 }
 
-.job-item h4 {
-    margin-bottom: 5px;
-}
-
-.company, .date {
+.lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--secondary-grey);
     font-size: 0.9em;
-    color: #666;
-    display: inline-block;
-    margin-bottom: 10px;
+    padding: 2px 5px;
+    transition: all 0.3s ease;
 }
 
-/* Grid layout a projektekhez */
-.grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+.lang-btn:hover {
+    color: var(--primary-dark);
 }
 
-.card {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+.lang-btn.active {
+    color: var(--accent-blue);
+    font-weight: 800;
+    text-decoration: underline;
 }
 
-.card a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
+.separator {
+    color: #ccc;
+    font-size: 0.8em;
 }
 
-/* Kapcsolat és Lábléc */
-.contact-list {
-    list-style: none;
-}
-
+/* === LÁBLÉC === */
 footer {
-    background: #333;
-    color: #fff;
+    background: var(--primary-dark);
+    color: var(--accent-blue);
     text-align: center;
-    padding: 20px 0;
-    margin-top: auto;
+    padding: 30px 0;
+    margin-top: 60px;
+    font-size: 0.9em;
 }
+
+/* === NYELVKEZELÉS === */
+
+/* Alapállapot: Magyar látszik, Angol rejtve */
+.lang-en { display: none !important; }
+.lang-hu { display: inline !important; }
+
+/* Ha az angol mód aktív (a body-n), akkor fordítva */
+body.en-mode .lang-hu { display: none !important; }
+body.en-mode .lang-en { display: inline !important; }
