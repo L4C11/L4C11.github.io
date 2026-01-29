@@ -166,3 +166,50 @@ footer {
 /* Ha az angol mód aktív (a body-n), akkor fordítva */
 body.en-mode .lang-hu { display: none !important; }
 body.en-mode .lang-en { display: inline !important; }
+
+/*----------------------------------------------------------------------------------------
+/*----------------------------------------------------------------------------------------
+
+/* === MOBIL NÉZET (RESPONSIVE) === */
+@media (max-width: 768px) {
+    /* 1. A fejléc elrendezésének megváltoztatása: egymás alá (column) */
+    header .container {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 15px; /* Kisebb margó mobilon */
+    }
+
+    /* 2. A Név (Logó) beállításai mobilon */
+    header .logo {
+        margin-bottom: 15px; /* Távolság a menütől */
+        font-size: 1.5rem;   /* Kicsit kisebb betűméret, hogy kiférjen */
+        white-space: nowrap; /* Ez TILTJA LE a sortörést: mindenképp egy sor marad */
+        width: 100%;         /* Teljes szélesség */
+        text-align: center;  /* Középre igazítjuk */
+    }
+
+    /* 3. A jobb oldali rész (Menü + Nyelvváltó) középre igazítása */
+    .header-right {
+        width: 100%;
+        justify-content: center;
+        flex-direction: column; /* Mobilon a menü és a nyelvváltó is kerüljön egymás alá */
+        gap: 10px;
+    }
+
+    /* 4. A navigáció igazítása */
+    nav ul {
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 10px; /* Távolság a nyelvváltótól */
+    }
+
+    /* 5. A menüpontok méretének finomítása */
+    nav ul li {
+        margin: 0 5px;
+    }
+
+    nav ul li a {
+        font-size: 0.95rem;
+    }
+}
